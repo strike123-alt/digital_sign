@@ -14,7 +14,7 @@ const FileVerify = () => {
     }
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const url = 'http://localhost:5000/fileVerify';
+        const url = `${process.env.REACT_APP_BACK_END_URL}/fileVerify`;
         const formData = new FormData();
         formData.append('file', file);
         formData.append('fileName', fileName);

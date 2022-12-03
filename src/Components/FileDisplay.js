@@ -7,7 +7,7 @@ const FileDisplay = () => {
     const getData = async () => {
         const { data } = await axios({
             method: "post",
-            url: "http://localhost:5000/fileDisplay",
+            url: `${process.env.REACT_APP_BACK_END_URL}/fileDisplay`,
             data: formData,
             headers: { "Content-Type": "multipart/form-data" }
 

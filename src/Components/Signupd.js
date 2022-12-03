@@ -25,7 +25,7 @@ const Signupd = (props) => {
             const isRunning = async () => {
                 const data = await axios({
                     method: "post",
-                    url: "http://localhost:5000/signup",
+                    url: `${process.env.REACT_APP_BACK_END_URL}/signup`,
                     data: formData,
                     headers: { "Content-Type": "multipart/form-data" }
                 })

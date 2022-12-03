@@ -22,7 +22,7 @@ const FileUploader = () => {
             if (parts.length === 2) return parts.pop().split(';').shift();
         }
         const email = getCookie('email');
-        const url = 'http://localhost:5000/fileUpload';
+        const url = `${process.env.REACT_APP_BACK_END_URL}/fileUpload`;
         const formData = new FormData();
         formData.append('file', file);
         if (fileName.length === 0)
