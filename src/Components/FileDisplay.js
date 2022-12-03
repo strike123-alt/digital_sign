@@ -1,37 +1,32 @@
+import { useState, useEffect } from 'react';
 import axios from "axios";
 const FileDisplay = () => {
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    const email = getCookie('email');
+    const [info, setInfo] = useState([])
     let formData = new FormData();
-    formData.append('email', email);
-    console.log(email);
-    const isRunning = () => {
-        axios({
+
+    const getData = async () => {
+        const { data } = await axios({
             method: "post",
             url: "http://localhost:5000/fileDisplay",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" }
 
-        }).then((resp) => {
-            return resp;
         })
 
-    };
+        setInfo(data);
+    }
 
-    let data = isRunning();
-    console.log(data);
-    const displayData = data.map((info, index) => {
-        return (
-            <tr key={index}>
-                <td>{info.email}</td>
-                <td>{info.file_name}</td>
-            </tr>
-        );
-    });
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    useEffect(() => {
+        const email = getCookie('email');
+        formData.append('email', email);
+        getData();
+    }, []);
 
 
     return (
@@ -40,14 +35,21 @@ const FileDisplay = () => {
                 <thead>
                     <tr>
 
-                        <th>Email</th>
+                        <th>File-ID</th>
                         <th>Document-Name</th>
                     </tr>
                 </thead>
                 <tbody>
 
 
-                    {displayData}
+                    {info?.map((item, i) => {
+                        return (
+                            <tr key={i}>
+                                <td>{item['file_id'] ?? ""}</td>
+                                <td>{item['file_name'] ?? ""}</td>
+                            </tr>
+                        );
+                    })}
 
                 </tbody>
             </table>

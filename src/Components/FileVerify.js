@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
 const FileVerify = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
+    const [sign, setSign] = useState('');
+    const [color, setColor] = useState(true);
     const handleChange = (event) => {
         setFile(event.target.files[0]);
         console.log(event.target.value);
@@ -28,37 +30,49 @@ const FileVerify = () => {
             });
             return data;
         }
-        console.log(await isRunning())
 
+        setSign(await isRunning());
+        if (sign === 'Bad-Sign')
+            setColor(false);
     }
+
     return (
 
+        <div>
+            <div className="cards">
 
-        <div className="cards">
+                <div className="home-page">
+                    <div className="ui grid">
+                    </div>
+                    <div className="three wide column"></div>
+                    <div className="ten wide column">
+                        <h1 className="ui header">File Verify</h1>
+                        <form className="ui form" onSubmit={handleSubmit}>
+                            <div className="field">
+                                <label>File-ID</label>
+                                <input type="text" name="file-id" placeholder="abc" onChange={(event) => {
+                                    setFileName(event.target.value)
+                                }} />
+                            </div>
+                            <div className="field">
+                                <label>File-Upload</label>
+                                <input type="file" name="file" onChange={handleChange} />
+                            </div>
+                            <button className="ui button blue" type="submit" >Upload</button>
+                        </form>
+                    </div>
+                    <div className="three wide column"></div>
+                </div>
+                <br />
 
-            <div className="home-page">
-                <div className="ui grid">
-                </div>
-                <div className="three wide column"></div>
-                <div className="ten wide column">
-                    <h1 className="ui header">File Verify</h1>
-                    <form className="ui form" onSubmit={handleSubmit}>
-                        <div className="field">
-                            <label>File-Name</label>
-                            <input type="text" name="file-name" placeholder="abc" onChange={(event) => {
-                                setFileName(event.target.value)
-                            }} />
-                        </div>
-                        <div className="field">
-                            <label>File-Upload</label>
-                            <input type="file" name="file" onChange={handleChange} />
-                        </div>
-                        <button className="ui button blue" type="submit" >Upload</button>
-                    </form>
-                </div>
-                <div className="three wide column"></div>
+            </div>
+            <div>
+                <h2 className="ui header" style={{ color: color ? 'grey' : 'red', textAlign: 'center' }}>
+                    {sign}
+                </h2>
             </div>
         </div>
+
 
 
     );

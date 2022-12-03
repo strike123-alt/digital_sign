@@ -4,7 +4,11 @@ import axios from 'axios';
 
 const FileUploader = () => {
     const [file, setFile] = useState(null);
-    //const [fileName, setFileName] = useState('');
+    const [fileName, setFileName] = useState('');
+    const fileNameChange = (e) => {
+        setFileName(e.target.value);
+        console.log(e.target.value);
+    }
     const handleChange = (event) => {
         setFile(event.target.files[0]);
         console.log(event.target.value);
@@ -21,7 +25,10 @@ const FileUploader = () => {
         const url = 'http://localhost:5000/fileUpload';
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('fileName', file.name);
+        if (fileName.length === 0)
+            formData.append('fileName', file.name);
+        else
+            formData.append('fileName', fileName);
         formData.append('email', email)
 
         console.log(file);
@@ -51,7 +58,7 @@ const FileUploader = () => {
                         <div className="field">
                             <label>File-Name</label>
                             <input type="text" name="file-name" placeholder="abc" onChange={(event) => {
-                                console.log(event.target.value);
+                                fileNameChange(event);
                             }} />
                         </div>
                         <div className="field">
