@@ -4,6 +4,7 @@ import Route from './Route';
 import FileUploader from './FileUpload';
 import FileDisplay from './FileDisplay';
 import FileVerify from './FileVerify';
+import Signin from './Signin';
 // const showFileUploader = () => {
 //     if (window.location.pathname === '/dropdown') {
 //         return <FileUploader />;
@@ -31,6 +32,9 @@ const FileJunction = () => {
             </Route>
             <Route path="/fileVerify">
                 <FileVerify />
+            </Route>
+            <Route path="/signOut">
+                <Signin />
             </Route>
         </div>
     );

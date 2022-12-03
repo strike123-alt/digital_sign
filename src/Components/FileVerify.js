@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 
@@ -6,7 +6,7 @@ const FileVerify = () => {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState('');
     const [sign, setSign] = useState('');
-    const [color, setColor] = useState(true);
+
     const handleChange = (event) => {
         setFile(event.target.files[0]);
         console.log(event.target.value);
@@ -30,10 +30,8 @@ const FileVerify = () => {
             });
             return data;
         }
-
-        setSign(await isRunning());
-        if (sign === 'Bad-Sign')
-            setColor(false);
+        const resp = await isRunning()
+        setSign(resp);
     }
 
     return (
@@ -67,11 +65,11 @@ const FileVerify = () => {
 
             </div>
             <div>
-                <h2 className="ui header" style={{ color: color ? 'grey' : 'red', textAlign: 'center' }}>
+                <h2 className="ui header" style={{ color: sign === 'Bad-Sign' ? 'red' : 'blue', textAlign: 'center' }}>
                     {sign}
                 </h2>
             </div>
-        </div>
+        </div >
 
 
 

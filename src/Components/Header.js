@@ -1,3 +1,4 @@
+import { findByLabelText } from '@testing-library/react';
 import React from 'react';
 import Link from './Link';
 
@@ -14,7 +15,9 @@ const Header = () => {
                 File Valid
             </Link>
 
-
+            <Link href="/signOut" className="item" style={{ display: 'flex', alignItem: 'flex-end', justifyContent: 'flex-end' }}>
+                Log-out
+            </Link>
         </div>
     );
 };
