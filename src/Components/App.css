@@ -1,0 +1,38 @@
+.cards {
+    margin: 50px;
+    border: 2px solid grey;
+}
+
+.home-page {
+    margin: 50px;
+}
+
+.home-page>* {
+    margin: 15px;
+}
+
+.items>button {
+    display: flex;
+    justify-self: center;
+}
+
+/* .home-img,
+.home-form {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: 20px;
+} */
+
+.form-border {
+    border: 2px solid grey;
+    margin: 50px;
+}
+
+.form-item {
+    margin: 50px;
+}
+
+.s-button {
+    color: blue;
+}
