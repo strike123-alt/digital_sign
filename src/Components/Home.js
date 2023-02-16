@@ -21,9 +21,7 @@ const Home = () => {
             return <Signup />;
         return <FileJunction />;
     };
-    useEffect(() => {
-
-    }, [home, signup]);
+   
 
     return (
         whichState()
